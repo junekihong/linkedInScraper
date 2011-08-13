@@ -1,0 +1,13 @@
+
+First Name: Mohammed
+Last Name: A Sabir Abdelrahman
+Headline: Supervisor / Senior Engineer at CeLTeL for Services
+Location: Sudan
+Industry: Telecommunications
+
+Current: ['Manager / Supervisor / Senior Engineer at CeLTeL for Services']
+Past: ['Telcommunication Engineer at Information Center / Police HQ']
+Education: ['Bayan College For Science & Technology', 'Bayan College for Science & Technology', 'Sudan University for Science & Technology']
+Recommendations: N/A
+Connections: 4
+Websites: N/A
