@@ -5,7 +5,7 @@
 
 from scrapy.item import Item, Field
 
-class LinkedinItem(Item):
+class linkedInItem(Item):
     # define the fields for your item here like:
     # name = Field()
     
