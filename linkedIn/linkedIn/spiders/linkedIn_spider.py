@@ -40,13 +40,20 @@ class linkedInSpider(BaseSpider):
 	]
 
 	def parse(self, response):
-		item = linkedInItem()
 		hxs = HtmlXPathSelector(response)	   	
 		
-		item['name'] = hxs.select('//h1/span/span/text()').extract()
-		item['location'] = hxs.select('//dd/span/text()').extract()
-		item['industry'] = hxs.select('//dd[@class="industry"]/text()').extract()
-		
-		return item    
-	    
-
+		if not hxs.select('//body[@class="guest directory"]'): #if it is not a directory (its a regular page)
+			item = linkedInItem()		
+			item['name'] = hxs.select('//h1/span/span/text()').extract()
+			item['location'] = hxs.select('//dd/span/text()').extract()
+			item['industry'] = hxs.select('//dd[@class="industry"]/text()').extract()		
+			yield item
+		else: #if it is a directory
+			for url in hxs.select('//ul[@class="directory"]/li/a/@href').extract():	    
+				yield Request(url, callback=self.parse)
+				
+				
+				
+				
+				
+				
