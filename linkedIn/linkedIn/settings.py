@@ -14,3 +14,7 @@ NEWSPIDER_MODULE = 'linkedIn.spiders'
 DEFAULT_ITEM_CLASS = 'linkedIn.items.LinkedinItem'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
+
+SCHEDULER_ORDER = 'BFO'
+FEED_URI = 'items.json'
+FEED_FORMAT = 'json'
