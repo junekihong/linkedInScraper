@@ -16,5 +16,8 @@ USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
 
 SCHEDULER_ORDER = 'BFO'
-FEED_URI = 'items.json'
-FEED_FORMAT = 'json'
+#FEED_URI = 'items.json'
+#FEED_FORMAT = 'json'
+
+
+ITEM_PIPELINES = ['linkedIn.pipelines.LinkedinPipeline']

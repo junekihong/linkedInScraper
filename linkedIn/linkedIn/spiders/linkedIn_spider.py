@@ -3,8 +3,12 @@ from scrapy.selector import HtmlXPathSelector
 from scrapy.http import Request
 from linkedIn.items import linkedInItem
 
+import random
+
+sampling = True
+
 def striplist(l):
-	return ([x.strip() for x in l])				
+	return ([x.strip().replace('\t',"") for x in l])				
 
 
 
@@ -13,7 +17,8 @@ class linkedInSpider(BaseSpider):
 	allowed_domains = ["linkedin.com"]
 	start_urls = [
 		#"http://www.linkedin.com/pub/rokalight-a-roka-holding-b-v-company/36/530/5b5"
-		"http://www.linkedin.com/directory/people/as.html"
+		"http://www.linkedin.com/pub/chandrashekar-a-s/22/677/79a"
+		#"http://www.linkedin.com/directory/people/as.html"
 
 
 		#"http://www.linkedin.com/directory/people/a.html",
@@ -50,17 +55,22 @@ class linkedInSpider(BaseSpider):
 		if not hxs.select('//body[@class="guest directory"]'): #if it is not a directory (its a regular page)
 			item = linkedInItem()		
 			item['name'] = striplist(hxs.select('//h1/span/span/text()').extract())
+			item['headlineTitle'] = striplist(hxs.select('//p[@class="headline-title title"]/text()').extract())
 			item['location'] = striplist(hxs.select('//dd/span/text()').extract())
 			item['industry'] = striplist(hxs.select('//dd[@class="industry"]/text()').extract())		
 			
-			#print hxs.select('//h1/span/span/text()').extract() 
-			#print striplist(hxs.select('//dd/span/text()').extract())
-			#print hxs.select('//dd[@class="industry"]/text()').extract()		
+			item['overviewCurrent'] = striplist(hxs.select('//dd[@class="summary-current"]/ul[@class="current"]/li/text()').extract())
+			item['overviewPast'] = striplist(hxs.select('//dd[@class="summary-past"]/ul[@class="past"]/li/text()').extract())
+			item['overviewEducation'] = striplist(hxs.select('//dd[@class="summary-education"]/ul/li/text()').extract())
+			
 			yield item
 		else: #if it is a directory
 			for url in hxs.select('//ul[@class="directory"]/li/a/@href').extract(): #take all of the subdirectories that show up and request them
-				yield Request('http://www.linkedin.com'+url, callback=self.parse)
-				
+				if sampling:
+					if random.random() < 0.1: 										#since we are taking a sample, we'll randomly keep a few directories and profiles, and throw out the rest.
+						yield Request('http://www.linkedin.com'+url, callback=self.parse)
+				else :
+					yield Request('http://www.linkedin.com'+url, callback=self.parse)
 				
 				
 				

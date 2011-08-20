@@ -7,18 +7,16 @@ from scrapy.item import Item, Field
 
 class linkedInItem(Item):
     # define the fields for your item here like:
-    # name = Field()
-    
 
     name = Field()
-    #headline = Field()
+    headlineTitle = Field()
     location = Field()
     industry = Field()
 
 
-    #current = Field()
-    #past = Field()
-    #education = Field()
+    overviewCurrent = Field()
+    overviewPast = Field()
+    overviewEducation = Field()
     #recommendations = Field()
     #connections = Field()
     #websites = Field()
