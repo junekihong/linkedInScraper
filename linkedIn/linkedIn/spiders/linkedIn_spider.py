@@ -63,6 +63,22 @@ class linkedInSpider(BaseSpider):
 			item['overviewPast'] = striplist(hxs.select('//dd[@class="summary-past"]/ul[@class="past"]/li/text()').extract())
 			item['overviewEducation'] = striplist(hxs.select('//dd[@class="summary-education"]/ul/li/text()').extract())
 			
+			#item['recommendations'] = striplist(hxs.select('').extract())
+			item['connections'] = striplist(hxs.select('//dd[@class="overview-connections"]/p/strong/text()').extract())
+			#item['websites'] = striplist(hxs.select('').extract())
+			
+			item['descriptionSummary']= striplist(hxs.select('//p[@class=" description summary"]/text()').extract())
+			item['summarySpecialties']= striplist(hxs.select('//div[@id="profile-specialties"]/p/text()').extract())
+			#item['descriptionExperience']
+			#item['descriptionEducation']
+			
+			item['additionalInterests'] = striplist(hxs.select('//dd[@class="interests"]/p[@class=""]/text()').extract())
+			#item['additionalGroups']
+			item['additionalAwards'] = striplist(hxs.select('//p[@class=" ''"]/text()').extract())
+			
+			item['contactFor'] = striplist(hxs.select('//div[@class="interested"]/ul/li/text()').extract())
+			
+			
 			yield item
 		else: #if it is a directory
 			for url in hxs.select('//ul[@class="directory"]/li/a/@href').extract(): #take all of the subdirectories that show up and request them

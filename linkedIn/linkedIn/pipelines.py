@@ -13,23 +13,50 @@ class LinkedinPipeline(object):
     def process_item(self, item, spider):
         #return item
         
-        line = json.dumps(dict(item)) + "\n"
+        #line = json.dumps(dict(item)) + "\n"
         
-        dictything = dict(item)
-        print json.dumps(dict(item))
-        what = dictything['name']
-        print what
-        print json.dumps(what)
+        exampleLine = "name ## headlineTitle ## location ## industry ## overviewCurrent ## overviewEducation ## connections ## "
+        exampleLine = exampleLine + "additionalAwards ## contactFor ## "
+        self.file.write(exampleLine + "\n\n")
         
-        print 'asdf'
+        thing = dict(item)
         
-        for x,y in dict(item).iteritems():
-        	print json.dumps(x) + "\t\t\t = " +json.dumps(y)
         
-        for x,y in dict(item).iteritems():
-        	print json.dumps(x) +": "
-        	for z in y:
-        		print "\t"+json.dumps(z)
+        
+        #####################################################################################################
+        name 				= json.dumps(thing['name'])
+        headlineTitle 		= json.dumps(thing['headlineTitle'])
+        location 			= json.dumps(thing['location'])
+        industry 			= json.dumps(thing['industry'])
+        
+        overviewCurrent 	= json.dumps(thing['overviewCurrent'])
+        overviewEducation 	= json.dumps(thing['overviewEducation'])
+        
+        connections			= json.dumps(thing['connections'])
+        
+        additionalAwards	= json.dumps(thing['additionalAwards'])
+        contactFor			= json.dumps(thing['contactFor'])
+        
+        #####################################################################################################
+        line = name + " ## " + headlineTitle + " ## " + location + " ## " + industry + " ## " 
+        line = line + overviewCurrent + " ## "+overviewEducation+" ## "+connections+" ## "
+        
+        line = line + additionalAwards + " ## " + contactFor + " ## "
+        #####################################################################################################
         
         self.file.write(line)
+        
+        
+        #for x,y in dict(item).iteritems():
+        #	print json.dumps(x) + "\t\t\t = " +json.dumps(y)
+        
+        #for x,y in dict(item).iteritems():
+        #	print json.dumps(x) +": "
+        #	for z in y:
+        #		print "\t"+json.dumps(z)
+        		
+       	
+        
+        
+        #self.file.write(line)
         return item
