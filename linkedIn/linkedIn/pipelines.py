@@ -8,7 +8,7 @@ import json
 
 class LinkedinPipeline(object):
     def __init__(self):
-    	self.file = open('items.jl','wb')
+    	self.file = open('items.txt','wb')
     
     def process_item(self, item, spider):
         #return item
@@ -16,7 +16,7 @@ class LinkedinPipeline(object):
         #line = json.dumps(dict(item)) + "\n"
         
         exampleLine = "name ## headlineTitle ## location ## industry ## overviewCurrent ## overviewEducation ## connections ## "
-        exampleLine = exampleLine + "additionalAwards ## contactFor ## "
+        #exampleLine = exampleLine + "additionalAwards ## contactFor ## "
         self.file.write(exampleLine + "\n\n")
         
         thing = dict(item)
@@ -34,14 +34,69 @@ class LinkedinPipeline(object):
         
         connections			= json.dumps(thing['connections'])
         
-        additionalAwards	= json.dumps(thing['additionalAwards'])
-        contactFor			= json.dumps(thing['contactFor'])
+        experienceHead1		= json.dumps(thing['experienceHead1'])
+        expTimeStart1		= json.dumps(thing['expTimeStart1'])
+        expTimeEnd1			= json.dumps(thing['expTimeEnd1'])
+        expTimeDuration1	= json.dumps(thing['expTimeDuration1'])
+        
+        experienceHead2		= json.dumps(thing['experienceHead2'])
+        expTimeStart2		= json.dumps(thing['expTimeStart2'])
+        expTimeEnd2			= json.dumps(thing['expTimeEnd2'])
+        expTimeDuration2	= json.dumps(thing['expTimeDuration2'])
+        
+        experienceHead3		= json.dumps(thing['experienceHead3'])
+        expTimeStart3		= json.dumps(thing['expTimeStart3'])
+        expTimeEnd3			= json.dumps(thing['expTimeEnd3'])
+        expTimeDuration3	= json.dumps(thing['expTimeDuration3'])
+        
+        experienceHead4		= json.dumps(thing['experienceHead4'])
+        expTimeStart4		= json.dumps(thing['expTimeStart4'])
+        expTimeEnd4			= json.dumps(thing['expTimeEnd4'])
+        expTimeDuration4	= json.dumps(thing['expTimeDuration4'])
+        
+        experienceHead5		= json.dumps(thing['experienceHead5'])
+        expTimeStart5		= json.dumps(thing['expTimeStart5'])
+        expTimeEnd5			= json.dumps(thing['expTimeEnd5'])
+        expTimeDuration5	= json.dumps(thing['expTimeDuration5'])
+        
+        
+        
+        #additionalAwards	= json.dumps(thing['additionalAwards'])
+        #contactFor			= json.dumps(thing['contactFor'])
         
         #####################################################################################################
-        line = name + " ## " + headlineTitle + " ## " + location + " ## " + industry + " ## " 
-        line = line + overviewCurrent + " ## "+overviewEducation+" ## "+connections+" ## "
+        delimiter = " # "
         
-        line = line + additionalAwards + " ## " + contactFor + " ## "
+        line = name + delimiter + headlineTitle + delimiter + location + delimiter + industry + delimiter
+        line = line + overviewCurrent + delimiter + overviewEducation + delimiter + connections + delimiter
+        
+        line = line + experienceHead1 + delimiter
+        line = line + expTimeStart1 + delimiter
+        line = line + expTimeEnd1 + delimiter
+        line = line + expTimeDuration1 + delimiter
+        
+        line = line + experienceHead2 + delimiter
+        line = line + expTimeStart2 + delimiter
+        line = line + expTimeEnd2 + delimiter
+        line = line + expTimeDuration2 + delimiter
+        
+        line = line + experienceHead3 + delimiter
+        line = line + expTimeStart3 + delimiter
+        line = line + expTimeEnd3 + delimiter
+        line = line + expTimeDuration3 + delimiter
+        
+        line = line + experienceHead4 + delimiter
+        line = line + expTimeStart4 + delimiter
+        line = line + expTimeEnd4 + delimiter
+        line = line + expTimeDuration4 + delimiter
+        
+        line = line + experienceHead5 + delimiter
+        line = line + expTimeStart5 + delimiter
+        line = line + expTimeEnd5 + delimiter
+        line = line + expTimeDuration5 + delimiter
+        
+        
+        #line = line + additionalAwards + " ## "
         #####################################################################################################
         
         self.file.write(line)

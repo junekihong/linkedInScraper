@@ -54,39 +54,222 @@ class linkedInSpider(BaseSpider):
 		
 		if not hxs.select('//body[@class="guest directory"]'): #if it is not a directory (its a regular page)
 			item = linkedInItem()		
-			item['name'] = striplist(hxs.select('//h1/span/span/text()').extract())
-			item['headlineTitle'] = striplist(hxs.select('//p[@class="headline-title title"]/text()').extract())
-			item['location'] = striplist(hxs.select('//dd/span/text()').extract())
-			item['industry'] = striplist(hxs.select('//dd[@class="industry"]/text()').extract())		
+			item['name'] 					= striplist(hxs.select('//h1/span/span/text()').extract())
+			item['headlineTitle'] 			= striplist(hxs.select('//p[@class="headline-title title"]/text()').extract())
+			item['location'] 				= striplist(hxs.select('//dd/span/text()').extract())
+			item['industry'] 				= striplist(hxs.select('//dd[@class="industry"]/text()').extract())		
 			
-			item['overviewCurrent'] = striplist(hxs.select('//dd[@class="summary-current"]/ul[@class="current"]/li/text()').extract())
-			item['overviewPast'] = striplist(hxs.select('//dd[@class="summary-past"]/ul[@class="past"]/li/text()').extract())
-			item['overviewEducation'] = striplist(hxs.select('//dd[@class="summary-education"]/ul/li/text()').extract())
+			item['overviewCurrent'] 		= striplist(hxs.select('//dd[@class="summary-current"]/ul[@class="current"]/li/text()').extract())
+			item['overviewPast'] 			= striplist(hxs.select('//dd[@class="summary-past"]/ul[@class="past"]/li/text()').extract())
+			item['overviewEducation'] 		= striplist(hxs.select('//dd[@class="summary-education"]/ul/li/text()').extract())
 			
-			#item['recommendations'] = striplist(hxs.select('').extract())
-			item['connections'] = striplist(hxs.select('//dd[@class="overview-connections"]/p/strong/text()').extract())
-			#item['websites'] = striplist(hxs.select('').extract())
+			#item['recommendations'] 		= striplist(hxs.select('').extract())
+			item['connections'] 			= striplist(hxs.select('//dd[@class="overview-connections"]/p/strong/text()').extract())
+			#item['websites'] 				= striplist(hxs.select('').extract())
 			
-			item['descriptionSummary']= striplist(hxs.select('//p[@class=" description summary"]/text()').extract())
-			item['summarySpecialties']= striplist(hxs.select('//div[@id="profile-specialties"]/p/text()').extract())
-			#item['descriptionExperience']
-			#item['descriptionEducation']
+			item['descriptionSummary']		= striplist(hxs.select('//p[@class=" description summary"]/text()').extract())
+			item['summarySpecialties']		= striplist(hxs.select('//div[@id="profile-specialties"]/p/text()').extract())
 			
-			item['additionalInterests'] = striplist(hxs.select('//dd[@class="interests"]/p[@class=""]/text()').extract())
-			#item['additionalGroups']
-			item['additionalAwards'] = striplist(hxs.select('//p[@class=" ''"]/text()').extract())
 			
-			item['contactFor'] = striplist(hxs.select('//div[@class="interested"]/ul/li/text()').extract())
+			#------------------------------------------------------------------------------------------------------------------
+			# Work Experience: title
+			#------------------------------------------------------------------------------------------------------------------
 			
+			experienceHeads					= striplist(hxs.select('//h3[@class="position-title anet"]/span[@class="title"]/text()').extract())
+			
+			if not experienceHeads:
+				item['experienceHead1']		= []
+			else:
+				item['experienceHead1']		= experienceHeads.pop(0)
+			if not experienceHeads:
+				item['experienceHead2']	 	= []
+			else:
+				item['experienceHead2']		= experienceHeads.pop(0)	
+			if not experienceHeads:
+				item['experienceHead3']		= []
+			else:
+				item['experienceHead3']		= experienceHeads.pop(0)
+			if not experienceHeads:
+				item['experienceHead4']		= []
+			else:
+				item['experienceHead4']		= experienceHeads.pop(0)
+			if not experienceHeads:
+				item['experienceHead5']		= []
+			else:
+				item['experienceHead5']		= experienceHeads.pop(0)
+				
+			#------------------------------------------------------------------------------------------------------------------
+			# Work Experience: Time started
+			#------------------------------------------------------------------------------------------------------------------
+			
+			currentExpTimeStart				= striplist(hxs.select('//div[@class="position  first experience vevent vcard summary-current"]/p/abbr[@class="dtstart"]/text()').extract())
+			expTimeStarts					= striplist(hxs.select('//div[@class="position   experience vevent vcard summary-past"]/p/abbr[@class="dtstart"]/text()').extract())
+			
+			if not currentExpTimeStart:
+				if not expTimeStarts:
+					item['expTimeStart1']	= []
+				else:
+					item['expTimeStart1']	= expTimeStarts.pop(0)
+			else: 
+				item['expTimeStart1']		= currentExpTimeStart.pop(0)
+			if not expTimeStarts:
+				item['expTimeStart2']		= []
+			else:
+				item['expTimeStart2']		= expTimeStarts.pop(0)
+			if not expTimeStarts:
+				item['expTimeStart3']		= []
+			else:
+				item['expTimeStart3']		= expTimeStarts.pop(0)
+			if not expTimeStarts:
+				item['expTimeStart4']		= []
+			else:
+				item['expTimeStart4']		= expTimeStarts.pop(0)
+			if not expTimeStarts:
+				item['expTimeStart5']		= []
+			else:
+				item['expTimeStart5']		= expTimeStarts.pop(0)
+			
+			
+			#------------------------------------------------------------------------------------------------------------------
+			# Work Experience: Time ended
+			#------------------------------------------------------------------------------------------------------------------
+			
+			
+			present							= striplist(hxs.select('//p[@class="period"]/abbr[@class="dtstamp"]/text()').extract())
+			expTimeEnds						= striplist(hxs.select('//div[@class="position   experience vevent vcard summary-past"]/p[@class="period"]/abbr[@class="dtend"]/text()').extract())
+			
+			if not present:
+				if not expTimeEnds:
+					item['expTimeEnd1']		= []
+				else:
+					item['expTimeEnd1']		= expTimeEnds.pop(0)
+			else:
+				item['expTimeEnd1']			= present.pop(0)
+			
+			if not expTimeEnds:
+				item['expTimeEnd2']			= []
+			else:
+				item['expTimeEnd2']			= expTimeEnds.pop(0)
+			if not expTimeEnds:
+				item['expTimeEnd3']			= []
+			else:
+				item['expTimeEnd3']			= expTimeEnds.pop(0)
+			if not expTimeEnds:
+				item['expTimeEnd4']			= []
+			else:
+				item['expTimeEnd4']			= expTimeEnds.pop(0)
+			if not expTimeEnds:
+				item['expTimeEnd5']			= []
+			else:
+				item['expTimeEnd5']			= expTimeEnds.pop(0)
+			
+			
+			
+			
+			#------------------------------------------------------------------------------------------------------------------
+			# Work Experience: Time duration
+			#------------------------------------------------------------------------------------------------------------------
+			
+			currentDuration					= striplist(hxs.select('//div[@class="position  first experience vevent vcard summary-current"]/p/span[@class="duration"]/text()').extract())
+			expTimeDurations				= striplist(hxs.select('//div[@class="position   experience vevent vcard summary-past"]/p/span[@class="duration"]/text()').extract())
+			
+			if not currentDuration:
+				if not expTimeDurations:
+					item['expTimeDuration1'] = []
+				else:
+					item['expTimeDuration1'] = expTimeDurations.pop(0)
+			else:
+				item['expTimeDuration1']	= currentDuration.pop(0)
+				
+			if not expTimeDurations:
+				item['expTimeDuration2'] 	= []
+			else:
+				item['expTimeDuration2']	= expTimeDurations.pop(0)
+			if not expTimeDurations:
+				item['expTimeDuration3'] 	= []
+			else:
+				item['expTimeDuration3']	= expTimeDurations.pop(0)
+			if not expTimeDurations:
+				item['expTimeDuration4'] 	= []
+			else:
+				item['expTimeDuration4']	= expTimeDurations.pop(0)
+			if not expTimeDurations:
+				item['expTimeDuration5'] 	= []
+			else:
+				item['expTimeDuration5']	= expTimeDurations.pop(0)	
+			
+			
+			#------------------------------------------------------------------------------------------------------------------
+			# Work Experience: Description
+			#------------------------------------------------------------------------------------------------------------------
+			
+			currentDescription				= striplist(hxs.select('//p[@class=" description current-position"]/text()').extract())
+			expDescriptions					= striplist(hxs.select('//p[@class=" description past-position"]/text()').extract())
+			
+#			if not currentDescription:
+#				if not expDescriptions:
+#					item['expDescription1']	= []
+#				else:
+#					item['expDescription1']	= expDescriptions.pop(0)
+#			else:
+#				item['expDescription1']		= currentDescription.pop(0)
+#			
+#			if not expDescriptions:
+#				item['expDescription2']		= []
+#			else:
+#				item['expDescription2']		= expDescriptions.pop(0)
+#			if not expDescriptions:
+#				item['expDescription3']		= []
+#			else:
+#				item['expDescription3']		= expDescriptions.pop(0)
+#			if not expDescriptions:
+#				item['expDescription4']		= []
+#			else:
+#				item['expDescription4']		= expDescriptions.pop(0)
+#			if not expDescriptions:
+#				item['expDescription5']		= []
+#			else:
+#				item['expDescription5']		= expDescriptions.pop(0)
+#			#item['expDescription2']			= []
+			
+			#item['expDescription3']			= []
+			
+			#item['expDescription4']			= []
+			
+			#item['expDescription5']			= []
+			
+		
 			
 			yield item
-		else: #if it is a directory
+			
+		else : #if it is a directory
 			for url in hxs.select('//ul[@class="directory"]/li/a/@href').extract(): #take all of the subdirectories that show up and request them
 				if sampling:
 					if random.random() < 0.1: 										#since we are taking a sample, we'll randomly keep a few directories and profiles, and throw out the rest.
 						yield Request('http://www.linkedin.com'+url, callback=self.parse)
 				else :
 					yield Request('http://www.linkedin.com'+url, callback=self.parse)
+			
+			
+			
+			
+			
+			
+			
+			
+#			
+    		
+    		#item['descriptionEducation']
+    		
+    		#tem['additionalInterests'] 	= striplist(hxs.select('//dd[@class="interests"]/p[@class=""]/text()').extract())
+    		
+    		#item['additionalGroups']
+    		
+    		#item['additionalAwards'] 		= striplist(hxs.select('//p[@class=" \'\'"]/text()').extract())
+    		
+    		#item['contactFor'] 				= striplist(hxs.select('//div[@class="interested"]/ul').extract())
+			
+		
 				
 				
 				
