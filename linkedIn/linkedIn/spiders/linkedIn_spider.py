@@ -17,8 +17,8 @@ class linkedInSpider(BaseSpider):
 	allowed_domains = ["linkedin.com"]
 	start_urls = [
 		#"http://www.linkedin.com/pub/rokalight-a-roka-holding-b-v-company/36/530/5b5"
-		"http://www.linkedin.com/pub/chandrashekar-a-s/22/677/79a"
-		#"http://www.linkedin.com/directory/people/as.html"
+		"http://www.linkedin.com/pub/chandrashekar-a-s/22/677/79a",
+		"http://www.linkedin.com/directory/people/as.html"
 
 
 		#"http://www.linkedin.com/directory/people/a.html",
@@ -203,8 +203,13 @@ class linkedInSpider(BaseSpider):
 			# Work Experience: Description
 			#------------------------------------------------------------------------------------------------------------------
 			
-			currentDescription				= striplist(hxs.select('//p[@class=" description current-position"]/text()').extract())
-			expDescriptions					= striplist(hxs.select('//p[@class=" description past-position"]/text()').extract())
+			#currentDescription				= striplist(hxs.select('//p[@class=" description current-position"]/text()').extract())
+			#expDescriptions					= striplist(hxs.select('//p[@class=" description past-position"]/text()').extract())
+			
+			#divs = hxs.select('//p[@class=" description past-position"]/text()')
+			#for p in divs.select('.//br') :
+			#	print p.extract()
+			
 			
 #			if not currentDescription:
 #				if not expDescriptions:
