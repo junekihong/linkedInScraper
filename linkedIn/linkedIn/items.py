@@ -54,6 +54,37 @@ class linkedInItem(Item):
     expTimeDuration5			= Field()
     expDescription5				= Field()
     
+    
+    
+    educationSchoolName1		= Field()
+    educationMajor1				= Field()
+    educationDegree1			= Field()
+    eduTimeStart1				= Field()
+    eduTimeEnd1					= Field()
+    
+    educationSchoolName2		= Field()
+    educationMajor2				= Field()
+    educationDegree2			= Field()
+    eduTimeStart2				= Field()
+    eduTimeEnd2					= Field()
+    
+    educationSchoolName3		= Field()
+    educationMajor3				= Field()
+    educationDegree3			= Field()
+    eduTimeStart3				= Field()
+    eduTimeEnd3					= Field()
+    
+    #educationSchoolName4		= Field()
+    #educationMajor4				= Field()
+    #eduTimeStart4				= Field()
+    #eduTimeEnd4					= Field()
+    
+    #educationSchoolName5		= Field()
+    #educationMajor5				= Field()
+    #eduTimeStart5				= Field()
+    #eduTimeEnd5					= Field()
+
+
     #descriptionEducation 		= Field()
     
     additionalInterests			= Field()

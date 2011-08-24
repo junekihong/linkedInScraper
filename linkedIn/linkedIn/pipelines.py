@@ -56,13 +56,29 @@ class LinkedinPipeline(object):
         
         
         
+        educationSchool1	= json.dumps(thing['educationSchoolName1'])
+        educationDegree1	= json.dumps(thing['educationDegree1'])
+        educationMajor1		= json.dumps(thing['educationMajor1'])
+        eduTimeStart1		= json.dumps(thing['eduTimeStart1'])
+        
+        educationSchool2	= json.dumps(thing['educationSchoolName2'])
+        educationDegree2	= json.dumps(thing['educationDegree2'])
+        educationMajor2		= json.dumps(thing['educationMajor2'])
+        eduTimeStart2		= json.dumps(thing['eduTimeStart2'])
+        
+        educationSchool3	= json.dumps(thing['educationSchoolName3'])
+        educationDegree3	= json.dumps(thing['educationDegree3'])
+        educationMajor3		= json.dumps(thing['educationMajor3'])
+        eduTimeStart3		= json.dumps(thing['eduTimeStart3'])
+        
+        
         #additionalAwards	= json.dumps(thing['additionalAwards'])
         #contactFor			= json.dumps(thing['contactFor'])
         
         #####################################################################################################
         delimiter = " # "
         
-        exampleLine = "Name" + delimiter + "Headline Title" + delimiter + "Location" + delimiter + "Industry" + delimiter + "Overview Current" + delimiter + "Overview Education" + delimiter + "Connections" + delimiter + "Experience Title 1" + delimiter + "Time Began 1" + delimiter + "Time Ended 1" + delimiter + "Duration 1" + delimiter + "Experience Title 2" + delimiter + "Time Began 2" + delimiter + "Time Ended 2" + delimiter + "Duration 2" + delimiter + "Experience Title 3" + delimiter + "Time Began 3" + delimiter + "Time Ended 3" + delimiter + "Duration 3" + delimiter + "Experience Title 4" + delimiter + "Time Began 4" + delimiter + "Time Ended 4" + delimiter + "Duration 4" + delimiter + "Experience Title 5" + delimiter + "Time Began 5" + delimiter + "Time Ended 5" + delimiter + "Duration 5" + delimiter 
+        
         
         line = name + delimiter + headlineTitle + delimiter + location + delimiter + industry + delimiter
         line = line + overviewCurrent + delimiter + overviewEducation + delimiter + connections + delimiter
@@ -93,10 +109,22 @@ class LinkedinPipeline(object):
         line = line + expTimeDuration5 + delimiter
         
         
+        
+        line = line + educationSchool1 + delimiter + educationDegree1 + delimiter + educationMajor1 + delimiter + eduTimeStart1 + delimiter
+        
+        line = line + educationSchool2 + delimiter + educationDegree2 + delimiter + educationMajor2 + delimiter + eduTimeStart2 + delimiter
+        
+        line = line + educationSchool3 + delimiter + educationDegree3 + delimiter + educationMajor3 + delimiter + eduTimeStart3 + delimiter
+        
+        
         #line = line + additionalAwards + " ## "
         
         line = line + '\n'
         #####################################################################################################
+        
+        exampleLine = "Name" + delimiter + "Headline Title" + delimiter + "Location" + delimiter + "Industry" + delimiter + "Overview Current" + delimiter + "Overview Education" + delimiter + "Connections" + delimiter + "Experience Title 1" + delimiter + "Time Began 1" + delimiter + "Time Ended 1" + delimiter + "Duration 1" + delimiter + "Experience Title 2" + delimiter + "Time Began 2" + delimiter + "Time Ended 2" + delimiter + "Duration 2" + delimiter + "Experience Title 3" + delimiter + "Time Began 3" + delimiter + "Time Ended 3" + delimiter + "Duration 3" + delimiter + "Experience Title 4" + delimiter + "Time Began 4" + delimiter + "Time Ended 4" + delimiter + "Duration 4" + delimiter + "Experience Title 5" + delimiter + "Time Began 5" + delimiter + "Time Ended 5" + delimiter + "Duration 5" + delimiter 
+        
+        #self.file.write(exampleLine)
         
         self.file.write(line)
         
