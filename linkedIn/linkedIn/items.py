@@ -23,36 +23,44 @@ class linkedInItem(Item):
     summarySpecialties 			= Field()
     
     
+    experienceHeads				= Field()
+    expTimeStarts				= Field()
+    expTimeEnds					= Field()
+    #expDescriptions				= Field()
     
-    experienceHead1			 	= Field()
-    expTimeStart1				= Field()
-    expTimeEnd1					= Field()
-    expTimeDuration1			= Field()
-    expDescription1				= Field()
     
-    experienceHead2	 			= Field()
-    expTimeStart2				= Field()
-    expTimeEnd2					= Field()
-    expTimeDuration2			= Field()
-    expDescription2				= Field()
+#    experienceHead1			 	= Field()
+#    expTimeStart1				= Field()
+#    expTimeEnd1					= Field()
+#    expTimeDuration1			= Field()
+#    expDescription1				= Field()
     
-    experienceHead3			 	= Field()
-    expTimeStart3				= Field()
-    expTimeEnd3					= Field()
-    expTimeDuration3			= Field()
-    expDescription3				= Field()
+#    experienceHead2	 			= Field()
+#    expTimeStart2				= Field()
+#    expTimeEnd2					= Field()
+#    expTimeDuration2			= Field()
+#    expDescription2				= Field()
     
-    experienceHead4			 	= Field()
-    expTimeStart4				= Field()
-    expTimeEnd4					= Field()
-    expTimeDuration4			= Field()
-    expDescription4				= Field()
+#    experienceHead3			 	= Field()
+#    expTimeStart3				= Field()
+#    expTimeEnd3					= Field()
+ #   expTimeDuration3			= Field()
+ #   expDescription3				= Field()
     
-    experienceHead5			 	= Field()
-    expTimeStart5				= Field()
-    expTimeEnd5					= Field()
-    expTimeDuration5			= Field()
-    expDescription5				= Field()
+#    experienceHead4			 	= Field()
+#    expTimeStart4				= Field()
+#    expTimeEnd4					= Field()
+#    expTimeDuration4			= Field()
+#    expDescription4				= Field()
+    
+#    experienceHead5			 	= Field()
+#    expTimeStart5				= Field()
+#    expTimeEnd5					= Field()
+#    expTimeDuration5			= Field()
+#    expDescription5				= Field()
+    
+    
+    
     
     
     
@@ -74,15 +82,6 @@ class linkedInItem(Item):
     eduTimeStart3				= Field()
     eduTimeEnd3					= Field()
     
-    #educationSchoolName4		= Field()
-    #educationMajor4				= Field()
-    #eduTimeStart4				= Field()
-    #eduTimeEnd4					= Field()
-    
-    #educationSchoolName5		= Field()
-    #educationMajor5				= Field()
-    #eduTimeStart5				= Field()
-    #eduTimeEnd5					= Field()
 
 
     #descriptionEducation 		= Field()

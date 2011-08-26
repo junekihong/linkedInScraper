@@ -5,8 +5,18 @@
 
 import json
 
+import unicodedata
+
+#handles crazy unicode characters by translating them back into ACII
+def unicodeHandle(stuff):
+	return unicodedata.normalize('NFKD', stuff).encode('ascii','ignore')
+
 
 class LinkedinPipeline(object):
+    
+    
+    
+    
     def __init__(self):
     	self.file = open('items.txt','wb')
     
@@ -19,57 +29,90 @@ class LinkedinPipeline(object):
         thing = dict(item)
         
         #####################################################################################################
-        name 				= json.dumps(thing['name'])
-        headlineTitle 		= json.dumps(thing['headlineTitle'])
-        location 			= json.dumps(thing['location'])
-        industry 			= json.dumps(thing['industry'])
+        name 				= thing['name']
+        headlineTitle 		= thing['headlineTitle']
+        location 			= thing['location']
+        industry 			= thing['industry']        
+        connections			= thing['connections']
+        
+        if name:
+        	name 			= unicodeHandle(name.pop(0))
+        else:
+        	name			= json.dumps(name)
+        if headlineTitle:
+        	headlineTitle 	= unicodeHandle(headlineTitle.pop(0))
+        else:
+        	headlineTitle	= json.dumps(headlineTitle)
+        if location:
+        	location 		= unicodeHandle(location.pop(0))
+        else:
+        	location		= json.dumps(location)
+        if industry:
+        	industry		= unicodeHandle(industry.pop(0))
+        else:
+        	industry 		= json.dumps(industry)
+        if connections:
+        	connections		= unicodeHandle(connections.pop(0))
+        else:
+        	connections		= json.dumps(connections)
+        
         
         overviewCurrent 	= json.dumps(thing['overviewCurrent'])
         overviewEducation 	= json.dumps(thing['overviewEducation'])
-        
-        connections			= json.dumps(thing['connections'])
-        
-        experienceHead1		= json.dumps(thing['experienceHead1'])
-        expTimeStart1		= json.dumps(thing['expTimeStart1'])
-        expTimeEnd1			= json.dumps(thing['expTimeEnd1'])
-        expTimeDuration1	= json.dumps(thing['expTimeDuration1'])
-        
-        experienceHead2		= json.dumps(thing['experienceHead2'])
-        expTimeStart2		= json.dumps(thing['expTimeStart2'])
-        expTimeEnd2			= json.dumps(thing['expTimeEnd2'])
-        expTimeDuration2	= json.dumps(thing['expTimeDuration2'])
-        
-        experienceHead3		= json.dumps(thing['experienceHead3'])
-        expTimeStart3		= json.dumps(thing['expTimeStart3'])
-        expTimeEnd3			= json.dumps(thing['expTimeEnd3'])
-        expTimeDuration3	= json.dumps(thing['expTimeDuration3'])
-        
-        experienceHead4		= json.dumps(thing['experienceHead4'])
-        expTimeStart4		= json.dumps(thing['expTimeStart4'])
-        expTimeEnd4			= json.dumps(thing['expTimeEnd4'])
-        expTimeDuration4	= json.dumps(thing['expTimeDuration4'])
-        
-        experienceHead5		= json.dumps(thing['experienceHead5'])
-        expTimeStart5		= json.dumps(thing['expTimeStart5'])
-        expTimeEnd5			= json.dumps(thing['expTimeEnd5'])
-        expTimeDuration5	= json.dumps(thing['expTimeDuration5'])
-        
-        
         
         educationSchool1	= json.dumps(thing['educationSchoolName1'])
         educationDegree1	= json.dumps(thing['educationDegree1'])
         educationMajor1		= json.dumps(thing['educationMajor1'])
         eduTimeStart1		= json.dumps(thing['eduTimeStart1'])
+        eduTimeEnd1			= json.dumps(thing['eduTimeEnd1'])
         
         educationSchool2	= json.dumps(thing['educationSchoolName2'])
         educationDegree2	= json.dumps(thing['educationDegree2'])
         educationMajor2		= json.dumps(thing['educationMajor2'])
         eduTimeStart2		= json.dumps(thing['eduTimeStart2'])
+        eduTimeEnd2			= json.dumps(thing['eduTimeEnd2'])
         
         educationSchool3	= json.dumps(thing['educationSchoolName3'])
         educationDegree3	= json.dumps(thing['educationDegree3'])
         educationMajor3		= json.dumps(thing['educationMajor3'])
         eduTimeStart3		= json.dumps(thing['eduTimeStart3'])
+        eduTimeEnd3			= json.dumps(thing['eduTimeEnd3'])
+        
+        
+        experienceHeads		= thing['experienceHeads']
+        expTimeStarts		= thing['expTimeStarts']
+        expTimeEnds			= thing['expTimeEnds']
+        
+        
+        
+        
+        
+#        experienceHead1		= json.dumps(thing['experienceHead1'])
+#        expTimeStart1		= json.dumps(thing['expTimeStart1'])
+#        expTimeEnd1			= json.dumps(thing['expTimeEnd1'])
+#        expTimeDuration1	= json.dumps(thing['expTimeDuration1'])
+        
+#        experienceHead2		= json.dumps(thing['experienceHead2'])
+#        expTimeStart2		= json.dumps(thing['expTimeStart2'])
+#        expTimeEnd2			= json.dumps(thing['expTimeEnd2'])
+#        expTimeDuration2	= json.dumps(thing['expTimeDuration2'])
+        
+#        experienceHead3		= json.dumps(thing['experienceHead3'])
+#        expTimeStart3		= json.dumps(thing['expTimeStart3'])
+#        expTimeEnd3			= json.dumps(thing['expTimeEnd3'])
+#        expTimeDuration3	= json.dumps(thing['expTimeDuration3'])
+        
+#        experienceHead4		= json.dumps(thing['experienceHead4'])
+#        expTimeStart4		= json.dumps(thing['expTimeStart4'])
+#        expTimeEnd4			= json.dumps(thing['expTimeEnd4'])
+#        expTimeDuration4	= json.dumps(thing['expTimeDuration4'])
+        
+#        experienceHead5		= json.dumps(thing['experienceHead5'])
+#        expTimeStart5		= json.dumps(thing['expTimeStart5'])
+#        expTimeEnd5			= json.dumps(thing['expTimeEnd5'])
+#        expTimeDuration5	= json.dumps(thing['expTimeDuration5'])
+        
+        
         
         
         #additionalAwards	= json.dumps(thing['additionalAwards'])
@@ -83,38 +126,31 @@ class LinkedinPipeline(object):
         line = name + delimiter + headlineTitle + delimiter + location + delimiter + industry + delimiter
         line = line + overviewCurrent + delimiter + overviewEducation + delimiter + connections + delimiter
         
-        line = line + experienceHead1 + delimiter
-        line = line + expTimeStart1 + delimiter
-        line = line + expTimeEnd1 + delimiter
-        line = line + expTimeDuration1 + delimiter
         
-        line = line + experienceHead2 + delimiter
-        line = line + expTimeStart2 + delimiter
-        line = line + expTimeEnd2 + delimiter
-        line = line + expTimeDuration2 + delimiter
+        line = line + educationSchool1 + delimiter + educationDegree1 + delimiter + educationMajor1 + delimiter + eduTimeStart1 + delimiter + eduTimeEnd1 + delimiter
         
-        line = line + experienceHead3 + delimiter
-        line = line + expTimeStart3 + delimiter
-        line = line + expTimeEnd3 + delimiter
-        line = line + expTimeDuration3 + delimiter
+        line = line + educationSchool2 + delimiter + educationDegree2 + delimiter + educationMajor2 + delimiter + eduTimeStart2 + delimiter + eduTimeEnd2 + delimiter
         
-        line = line + experienceHead4 + delimiter
-        line = line + expTimeStart4 + delimiter
-        line = line + expTimeEnd4 + delimiter
-        line = line + expTimeDuration4 + delimiter
-        
-        line = line + experienceHead5 + delimiter
-        line = line + expTimeStart5 + delimiter
-        line = line + expTimeEnd5 + delimiter
-        line = line + expTimeDuration5 + delimiter
+        line = line + educationSchool3 + delimiter + educationDegree3 + delimiter + educationMajor3 + delimiter + eduTimeStart3 + delimiter + eduTimeEnd3 + delimiter
         
         
         
-        line = line + educationSchool1 + delimiter + educationDegree1 + delimiter + educationMajor1 + delimiter + eduTimeStart1 + delimiter
+        #print experienceHeads
+        #print expTimeStarts
+        #print expTimeEnds
+                
+        #handling the arbitrary number of work experiences
+        while experienceHeads and expTimeStarts and expTimeEnds: 
+        	line = line + experienceHeads.pop(0) + delimiter + expTimeStarts.pop(0) + delimiter + expTimeEnds.pop(0) + delimiter
         
-        line = line + educationSchool2 + delimiter + educationDegree2 + delimiter + educationMajor2 + delimiter + eduTimeStart2 + delimiter
+ 
+#        line = line + experienceHead1 + delimiter + expTimeStart1 + delimiter + expTimeEnd1 + delimiter + expTimeDuration1 + delimiter       
+#        line = line + experienceHead2 + delimiter + expTimeStart2 + delimiter + expTimeEnd2 + delimiter + expTimeDuration2 + delimiter
+#        line = line + experienceHead3 + delimiter + expTimeStart3 + delimiter + expTimeEnd3 + delimiter + expTimeDuration3 + delimiter
+#        line = line + experienceHead4 + delimiter + expTimeStart4 + delimiter + expTimeEnd4 + delimiter + expTimeDuration4 + delimiter
+#        line = line + experienceHead5 + delimiter + expTimeStart5 + delimiter + expTimeEnd5 + delimiter + expTimeDuration5 + delimiter
         
-        line = line + educationSchool3 + delimiter + educationDegree3 + delimiter + educationMajor3 + delimiter + eduTimeStart3 + delimiter
+        
         
         
         #line = line + additionalAwards + " ## "
