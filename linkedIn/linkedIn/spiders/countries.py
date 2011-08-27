@@ -1,10 +1,17 @@
 
+import unicodedata
+
+def unicodeHandle(stuff):
+	return unicodedata.normalize('NFKD', stuff).encode('ascii','ignore')
+
+
+
 default = 'US'
 
 countries = dict([
 	('United States of America' , 'US'),
 	('United States' , 'US'),
-
+	('Estados Unidos' , 'US'),
 
 	('Andorra' , 'AD'),
 	('United Arab Emirates' , 'AE'),
@@ -35,6 +42,9 @@ countries = dict([
 	('Brunei Darussalam' , 'BN'),
 	('Bolivia' , 'BO'),
 	('Brazil' , 'BR'),
+	('Brasil' , 'BR'),
+	
+	
 	('Bahama' , 'BS'),
 	('Bhutan' , 'BT'),
 	('Burma ' , 'BU'),
@@ -62,6 +72,10 @@ countries = dict([
 	('Czech Republic' , 'CZ'),
 	('German Democratic Republic ' , 'DD'),
 	('Germany' , 'DE'),
+	('Deutschland' , 'DE'),
+	('Alemania' , 'DE'),
+	
+	
 	('Djibouti' , 'DJ'),
 	('Denmark' , 'DK'),
 	('Dominica' , 'DM'),
@@ -73,6 +87,7 @@ countries = dict([
 	('Western Sahara' , 'EH'),
 	('Eritrea' , 'ER'),
 	('Spain' , 'ES'),
+	('Espana', 'ES'),
 	('Ethiopia' , 'ET'),
 	('Finland' , 'FI'),
 	('Fiji' , 'FJ'),
@@ -82,7 +97,7 @@ countries = dict([
 	('France' , 'FR'),
 	('France), Metropolitan' , 'FX'),
 	('Gabon' , 'GA'),
-	('United Kingdom ' , 'GB'),
+	('United Kingdom' , 'GB'),
 	('Grenada' , 'GD'),
 	('Georgia' , 'GE'),
 	('French Guiana' , 'GF'),
@@ -112,6 +127,7 @@ countries = dict([
 	('British Indian Ocean Territory' , 'IO'),
 	('Iraq' , 'IQ'),
 	('Islamic Republic of Iran' , 'IR'),
+	('Iran', 'IR'),
 	('Iceland' , 'IS'),
 	('Italy' , 'IT'),
 	('Jamaica' , 'JM'),
@@ -223,6 +239,7 @@ countries = dict([
 	('Tonga' , 'TO'),
 	('East Timor' , 'TP'),
 	('Turkey' , 'TR'),
+	('Turkiye', 'TR'),
 	('Trinidad & Tobago' , 'TT'),
 	('Tuvalu' , 'TV'),
 	('Taiwan), Province of China' , 'TW'),
@@ -238,6 +255,7 @@ countries = dict([
 	('British Virgin Islands' , 'VG'),
 	('United States Virgin Islands' , 'VI'),
 	('Viet Nam' , 'VN'),
+	('Vietnam', 'VN'),
 	('Vanuatu' , 'VU'),
 	('Wallis & Futuna Islands' , 'WF'),
 	('Samoa' , 'WS'),
@@ -263,7 +281,8 @@ def checkLocation(x):
 	if not x:
 		return False
 	
-	location = x.pop(0)
+	location = unicodeHandle(x[0])
+	
 	
 	if not checkCountry(location) == 'US':
 		return False
@@ -272,9 +291,21 @@ def checkLocation(x):
 	
 	if comma == -1:
 		return True
-	
 	sublocations = location.split(', ')
-	print sublocations[-1]
+	country = sublocations[-1]
+	
+	
+	if not checkCountry(country) == 'US':
+		return False
+	area = country.find(' Area')
+	
+	if area == -1:
+		return True
+		
+	country = country.split(' Area')
+	country = country[0]
+	if not checkCountry(country) == 'US':
+		return False 
 	
 	return True
 		
