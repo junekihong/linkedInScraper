@@ -7,7 +7,9 @@ from scrapy.item import Item, Field
 
 class linkedInItem(Item):
     # define the fields for your item here like:
-
+    
+    url							= Field()
+    
     name 						= Field()
     headlineTitle 				= Field()
     location 					= Field()
