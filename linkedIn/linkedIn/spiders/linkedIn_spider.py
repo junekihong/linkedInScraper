@@ -6,7 +6,7 @@ from linkedIn.items import linkedInItem
 import random
 from countries import checkLocation
 
-randomSampling = False
+randomSampling = True
 
 def striplist(l):
 	return ([x.strip().replace('\t',"") for x in l])				
@@ -20,10 +20,9 @@ class linkedInSpider(BaseSpider):
 		#"http://www.linkedin.com/pub/chandrashekar-a-s/22/677/79a",
 		#"http://www.linkedin.com/directory/people/as.html"
 		
-		'http://www.linkedin.com/directory/people/arahman-2.html',
-		'http://www.linkedin.com/directory/people/akgz-3.html',
-		'http://www.linkedin.com/directory/people/akgz-2.html'
 		
+		'http://www.linkedin.com/directory/people/x.html',
+		#'http://www.linkedin.com/directory/people/X1.html'
 
 		'''"http://www.linkedin.com/directory/people/a.html",
         "http://www.linkedin.com/directory/people/b.html",
@@ -320,7 +319,7 @@ class linkedInSpider(BaseSpider):
 		
 		else : #if it is a directory
 			for url in hxs.select('//ul[@class="directory"]/li/a/@href').extract(): #take all of the subdirectories that show up and request them
-				if not randomSampling or random.random() < 0.1: 								#random sampling.
+				if not randomSampling or random.random() < 0.3: 								#random sampling.
 					yield Request('http://www.linkedin.com'+url, callback=self.parse)
 				
 			
