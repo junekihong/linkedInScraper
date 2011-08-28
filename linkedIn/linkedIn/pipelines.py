@@ -12,6 +12,21 @@ def unicodeHandle(stuff):
 	return unicodedata.normalize('NFKD', stuff).encode('ascii','ignore')
 
 
+#remove the data from the arrays and store them nicely in formatted strings
+def cleanUpBrackets(stuff):
+	if isinstance(stuff,str):
+		return stuff
+	if not stuff:
+		return ''
+	else:
+		string = unicodeHandle(stuff.pop(0))
+		for x in stuff:
+			if not x == '':
+				string = string + ', ' + unicodeHandle(x)
+		return string
+
+
+
 class LinkedinPipeline(object):
     
     
@@ -29,56 +44,41 @@ class LinkedinPipeline(object):
         thing = dict(item)
         
         #####################################################################################################
+        # Note: I used to use json.dumps... before he wanted me to get rid of the brackets :P. So I cleaned up the brackets.
+        # name 				= json.dumps(thing['name'])
+        # headlineTitle 	= json.dumps(thing['headlineTitle'])
+        # etc
+        
         url					= thing['url']
         
-        name 				= thing['name']
-        headlineTitle 		= thing['headlineTitle']
-        location 			= thing['location']
-        industry 			= thing['industry']        
-        connections			= thing['connections']
+        name 				= cleanUpBrackets(thing['name'])
+        headlineTitle 		= cleanUpBrackets(thing['headlineTitle'])
+        location 			= cleanUpBrackets(thing['location'])
+        industry 			= cleanUpBrackets(thing['industry'])        
+        connections			= cleanUpBrackets(thing['connections'])
         
-        if name:
-        	name 			= unicodeHandle(name.pop(0))
-        else:
-        	name			= json.dumps(name)
-        if headlineTitle:
-        	headlineTitle 	= unicodeHandle(headlineTitle.pop(0))
-        else:
-        	headlineTitle	= json.dumps(headlineTitle)
-        if location:
-        	location 		= unicodeHandle(location.pop(0))
-        else:
-        	location		= json.dumps(location)
-        if industry:
-        	industry		= unicodeHandle(industry.pop(0))
-        else:
-        	industry 		= json.dumps(industry)
-        if connections:
-        	connections		= unicodeHandle(connections.pop(0))
-        else:
-        	connections		= json.dumps(connections)
+        overviewCurrent 	= cleanUpBrackets(thing['overviewCurrent'])        
+        overviewEducation 	= cleanUpBrackets(thing['overviewEducation'])
         
         
-        overviewCurrent 	= json.dumps(thing['overviewCurrent'])
-        overviewEducation 	= json.dumps(thing['overviewEducation'])
         
-        educationSchool1	= json.dumps(thing['educationSchoolName1'])
-        educationDegree1	= json.dumps(thing['educationDegree1'])
-        educationMajor1		= json.dumps(thing['educationMajor1'])
-        eduTimeStart1		= json.dumps(thing['eduTimeStart1'])
-        eduTimeEnd1			= json.dumps(thing['eduTimeEnd1'])
+        educationSchool1	= json.dumps(thing['educationSchoolName1']).replace('"','').replace('[','').replace(']','')
+        educationDegree1	= json.dumps(thing['educationDegree1']).replace('"','').replace('[','').replace(']','')
+        educationMajor1		= json.dumps(thing['educationMajor1']).replace('"','').replace('[','').replace(']','')
+        eduTimeStart1		= json.dumps(thing['eduTimeStart1']).replace('"','').replace('[','').replace(']','')
+        eduTimeEnd1			= json.dumps(thing['eduTimeEnd1']).replace('"','').replace('[','').replace(']','')
         
-        educationSchool2	= json.dumps(thing['educationSchoolName2'])
-        educationDegree2	= json.dumps(thing['educationDegree2'])
-        educationMajor2		= json.dumps(thing['educationMajor2'])
-        eduTimeStart2		= json.dumps(thing['eduTimeStart2'])
-        eduTimeEnd2			= json.dumps(thing['eduTimeEnd2'])
+        educationSchool2	= json.dumps(thing['educationSchoolName2']).replace('"','').replace('[','').replace(']','')
+        educationDegree2	= json.dumps(thing['educationDegree2']).replace('"','').replace('[','').replace(']','')
+        educationMajor2		= json.dumps(thing['educationMajor2']).replace('"','').replace('[','').replace(']','')
+        eduTimeStart2		= json.dumps(thing['eduTimeStart2']).replace('"','').replace('[','').replace(']','')
+        eduTimeEnd2			= json.dumps(thing['eduTimeEnd2']).replace('"','').replace('[','').replace(']','')
         
-        educationSchool3	= json.dumps(thing['educationSchoolName3'])
-        educationDegree3	= json.dumps(thing['educationDegree3'])
-        educationMajor3		= json.dumps(thing['educationMajor3'])
-        eduTimeStart3		= json.dumps(thing['eduTimeStart3'])
-        eduTimeEnd3			= json.dumps(thing['eduTimeEnd3'])
+        educationSchool3	= json.dumps(thing['educationSchoolName3']).replace('"','').replace('[','').replace(']','')
+        educationDegree3	= json.dumps(thing['educationDegree3']).replace('"','').replace('[','').replace(']','')
+        educationMajor3		= json.dumps(thing['educationMajor3']).replace('"','').replace('[','').replace(']','')
+        eduTimeStart3		= json.dumps(thing['eduTimeStart3']).replace('"','').replace('[','').replace(']','')
+        eduTimeEnd3			= json.dumps(thing['eduTimeEnd3']).replace('"','').replace('[','').replace(']','')
         
         
         experienceHeads		= thing['experienceHeads']
