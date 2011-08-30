@@ -18,10 +18,10 @@ class linkedInSpider(BaseSpider):
 	start_urls = [
 		#'http://www.linkedin.com/pub/omer-a-fareed/18/6a8/919',
 		#"http://www.linkedin.com/pub/chandrashekar-a-s/22/677/79a",
-		"http://www.linkedin.com/directory/people/A1.html",
+		#"http://www.linkedin.com/directory/people/A1.html",
 		
 		#'http://www.linkedin.com/directory/people/x.html',
-		#'http://www.linkedin.com/directory/people/X1.html',
+		'http://www.linkedin.com/directory/people/X1.html',
 
 
 		'''"http://www.linkedin.com/directory/people/a.html",
@@ -49,8 +49,8 @@ class linkedInSpider(BaseSpider):
         "http://www.linkedin.com/directory/people/w.html",
         "http://www.linkedin.com/directory/people/x.html",
         "http://www.linkedin.com/directory/people/y.html",
-        "http://www.linkedin.com/directory/people/z.html"
-        '''
+        "http://www.linkedin.com/directory/people/z.html"'''
+        
 	]
 
 	def parse(self, response):
