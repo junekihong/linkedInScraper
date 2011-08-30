@@ -255,6 +255,7 @@ countries = dict([
 	('Taiwan, Province of China' , 'TW'),
 	('Taiwan', 'TW'),
 	('Tanzania, United Republic of' , 'TZ'),
+	('Tanzania','TZ'),
 	('Ukraine' , 'UA'),
 	('Uganda' , 'UG'),
 	('United States Minor Outlying Islands' , 'UM'),
