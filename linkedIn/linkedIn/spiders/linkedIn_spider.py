@@ -3,8 +3,10 @@ from scrapy.selector import HtmlXPathSelector
 from scrapy.http import Request
 from linkedIn.items import linkedInItem
 
+import sys
 import random
 from countries import checkLocation
+
 
 randomSampling = True
 
@@ -21,10 +23,10 @@ class linkedInSpider(BaseSpider):
 		#"http://www.linkedin.com/directory/people/A1.html",
 		
 		#'http://www.linkedin.com/directory/people/x.html',
-		'http://www.linkedin.com/directory/people/X1.html',
+		#'http://www.linkedin.com/directory/people/X1.html',
 
 
-		'''"http://www.linkedin.com/directory/people/a.html",
+		"http://www.linkedin.com/directory/people/a.html",
         "http://www.linkedin.com/directory/people/b.html",
         "http://www.linkedin.com/directory/people/c.html",
         "http://www.linkedin.com/directory/people/d.html",
@@ -49,7 +51,7 @@ class linkedInSpider(BaseSpider):
         "http://www.linkedin.com/directory/people/w.html",
         "http://www.linkedin.com/directory/people/x.html",
         "http://www.linkedin.com/directory/people/y.html",
-        "http://www.linkedin.com/directory/people/z.html"'''
+        "http://www.linkedin.com/directory/people/z.html"
         
 	]
 
@@ -70,9 +72,12 @@ class linkedInSpider(BaseSpider):
 				item['location'] 				= striplist(hxs.select('//dd/span/text()').extract())
 			
 			
-				if not checkLocation(item['location']):
-					print item['location']
-				else:
+				#if not checkLocation(item['location']):
+					#print item['location']
+					#sys.stdout.flush()
+				#else:
+				
+				if checkLocation(item['location']):
 					item['industry'] 				= striplist(hxs.select('//dd[@class="industry"]/text()').extract())		
 		
 					item['overviewCurrent'] 		= striplist(hxs.select('//dd[@class="summary-current"]/ul[@class="current"]/li/text()').extract())

@@ -15,7 +15,7 @@ DEFAULT_ITEM_CLASS = 'linkedIn.items.LinkedinItem'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
 
-SCHEDULER_ORDER = 'BFO'
+SCHEDULER_ORDER = 'DFO'
 FEED_URI = 'items.json'
 FEED_FORMAT = 'json'
 
