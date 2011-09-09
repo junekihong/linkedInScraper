@@ -136,10 +136,6 @@ class LinkedinPipeline(object):
         line = line + educationSchool3 + delimiter + educationDegree3 + delimiter + educationMajor3 + delimiter + eduTimeStart3 + delimiter + eduTimeEnd3 + delimiter
         
         
-        
-        #print experienceHeads
-        #print expTimeStarts
-        #print expTimeEnds
                 
         #handling the arbitrary number of work experiences
         while experienceHeads and expTimeStarts and expTimeEnds: 

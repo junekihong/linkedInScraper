@@ -18,15 +18,10 @@ class linkedInSpider(BaseSpider):
 	name = "linkedin.com"
 	allowed_domains = ["linkedin.com"]
 	start_urls = [
-		#'http://www.linkedin.com/pub/omer-a-fareed/18/6a8/919',
-		#"http://www.linkedin.com/pub/chandrashekar-a-s/22/677/79a",
-		#"http://www.linkedin.com/directory/people/A1.html",
 		
-		#'http://www.linkedin.com/directory/people/x.html',
-		#'http://www.linkedin.com/directory/people/X1.html',
+		'http://www.linkedin.com/pub/jennifer-joseph-psy-d/3/820/a0',
 
-
-		"http://www.linkedin.com/directory/people/a.html",
+		'''"http://www.linkedin.com/directory/people/a.html",
         "http://www.linkedin.com/directory/people/b.html",
         "http://www.linkedin.com/directory/people/c.html",
         "http://www.linkedin.com/directory/people/d.html",
@@ -52,7 +47,7 @@ class linkedInSpider(BaseSpider):
         "http://www.linkedin.com/directory/people/x.html",
         "http://www.linkedin.com/directory/people/y.html",
         "http://www.linkedin.com/directory/people/z.html"
-        
+        '''
 	]
 
 	def parse(self, response):
@@ -232,22 +227,59 @@ class linkedInSpider(BaseSpider):
 					# Work Experience: title
 					experienceHeads					= striplist(hxs.select('//h3[@class="position-title anet"]/span[@class="title"]/text()').extract())
 					item['experienceHeads'] 		= striplist(hxs.select('//h3[@class="position-title anet"]/span[@class="title"]/text()').extract())
-
+					
+					
+					
 					# Work Experience: Time started
 					currentExpTimeStart				= striplist(hxs.select('//div[@class="position  first experience vevent vcard summary-current"]/p/abbr[@class="dtstart"]/text()').extract())
+					if not currentExpTimeStart:
+						currentExpTimeStart 		= striplist(hxs.select('//div[@class="position  first experience vevent vcard current-position"]/p/abbr[@class="dtstart"]/text()').extract())
+					
 					moreExpTimeStart				= striplist(hxs.select('//div[@class="position   experience vevent vcard summary-current"]/p/abbr[@class="dtstart"]/text()').extract())
+					if not moreExpTimeStart:
+						moreExpTimeStart			= striplist(hxs.select('//div[@class="position   experience vevent vcard current-position"]/p/abbr[@class="dtstart"]/text()').extract())
+					
+					
 					expTimeStarts					= striplist(hxs.select('//div[@class="position   experience vevent vcard summary-past"]/p/abbr[@class="dtstart"]/text()').extract())
+					if not expTimeStarts:
+						expTimeStarts				= striplist(hxs.select('//div[@class="position   experience vevent vcard past-position"]/p/abbr[@class="dtstart"]/text()').extract())
 			
 					item['expTimeStarts']			= currentExpTimeStart + moreExpTimeStart +expTimeStarts
-			
-
+					
+					
 					# Work Experience: Time ended
 		
 					present							= striplist(hxs.select('//p[@class="period"]/abbr[@class="dtstamp"]/text()').extract())
 					expTimeEnds						= striplist(hxs.select('//div[@class="position   experience vevent vcard summary-past"]/p[@class="period"]/abbr[@class="dtend"]/text()').extract())
+					if not expTimeEnds:
+						expTimeEnds					= striplist(hxs.select('//div[@class="position   experience vevent vcard past-position"]/p[@class="period"]/abbr[@class="dtend"]/text()').extract())
 			
 					item['expTimeEnds']				= present + expTimeEnds			
-			
+					
+					
+					
+					'''
+					print 'experienceHeads'
+					print experienceHeads
+					
+					print 'currentExpTimeStart'
+					print currentExpTimeStart
+					
+					
+					print 'moreExpTimeStart'
+					print moreExpTimeStart
+					
+					print 'expTimeStarts'
+					print expTimeStarts
+					
+					
+					print 'present'
+					print present
+					
+					print 'expTimeEnds'
+					print expTimeEnds
+					'''
+					
 		
 		
 					# Work Experience: Time duration
