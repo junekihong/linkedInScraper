@@ -328,7 +328,7 @@ class linkedInSpider(BaseSpider):
 		
 		else : #if it is a directory
 			for url in hxs.select('//ul[@class="directory"]/li/a/@href').extract(): #take all of the subdirectories that show up and request them
-				if not randomSampling or random.random() < 0.2: 								#random sampling.
+				if not randomSampling or random.random() < 0.1: 								#random sampling.
 					yield Request('http://www.linkedin.com'+url, callback=self.parse)
 				
 			
