@@ -19,9 +19,9 @@ class linkedInSpider(BaseSpider):
 	allowed_domains = ["linkedin.com"]
 	start_urls = [
 		
-		'http://www.linkedin.com/pub/jennifer-joseph-psy-d/3/820/a0',
+		#'http://www.linkedin.com/pub/jennifer-joseph-psy-d/3/820/a0',
 
-		'''"http://www.linkedin.com/directory/people/a.html",
+		"http://www.linkedin.com/directory/people/a.html",
         "http://www.linkedin.com/directory/people/b.html",
         "http://www.linkedin.com/directory/people/c.html",
         "http://www.linkedin.com/directory/people/d.html",
@@ -47,7 +47,7 @@ class linkedInSpider(BaseSpider):
         "http://www.linkedin.com/directory/people/x.html",
         "http://www.linkedin.com/directory/people/y.html",
         "http://www.linkedin.com/directory/people/z.html"
-        '''
+       	
 	]
 
 	def parse(self, response):
