@@ -9,76 +9,79 @@ from countries import checkLocation
 
 
 randomSampling = True
+samplingProbability = 0.1
+
+filterForUS = True
 
 def striplist(l):
-	return ([x.strip().replace('\t',"") for x in l])				
+        return ([x.strip().replace('\t',"") for x in l])				
 
 
 class linkedInSpider(BaseSpider):
 	name = "linkedin.com"
 	allowed_domains = ["linkedin.com"]
 	start_urls = [
-		
-		#'http://www.linkedin.com/pub/jennifer-joseph-psy-d/3/820/a0',
-
+                #"http://www.linkedin.com/pub/anette-orsten/2/109/554",
 		"http://www.linkedin.com/directory/people/a.html",
-        "http://www.linkedin.com/directory/people/b.html",
-        "http://www.linkedin.com/directory/people/c.html",
-        "http://www.linkedin.com/directory/people/d.html",
-        "http://www.linkedin.com/directory/people/e.html",
-        "http://www.linkedin.com/directory/people/f.html",
-        "http://www.linkedin.com/directory/people/g.html",
-        "http://www.linkedin.com/directory/people/h.html",
-        "http://www.linkedin.com/directory/people/i.html",
-        "http://www.linkedin.com/directory/people/j.html",
-        "http://www.linkedin.com/directory/people/k.html",
-        "http://www.linkedin.com/directory/people/l.html",
-        "http://www.linkedin.com/directory/people/m.html",
-        "http://www.linkedin.com/directory/people/n.html",
-        "http://www.linkedin.com/directory/people/o.html",
-        "http://www.linkedin.com/directory/people/p.html",
-        "http://www.linkedin.com/directory/people/q.html",
-        "http://www.linkedin.com/directory/people/r.html",
-        "http://www.linkedin.com/directory/people/s.html",
-        "http://www.linkedin.com/directory/people/t.html",
-        "http://www.linkedin.com/directory/people/u.html",
-        "http://www.linkedin.com/directory/people/v.html",
-        "http://www.linkedin.com/directory/people/w.html",
-        "http://www.linkedin.com/directory/people/x.html",
-        "http://www.linkedin.com/directory/people/y.html",
-        "http://www.linkedin.com/directory/people/z.html"
-       	
-	]
+                "http://www.linkedin.com/directory/people/b.html",
+                "http://www.linkedin.com/directory/people/c.html",
+                "http://www.linkedin.com/directory/people/d.html",
+                "http://www.linkedin.com/directory/people/e.html",
+                "http://www.linkedin.com/directory/people/f.html",
+                "http://www.linkedin.com/directory/people/g.html",
+                "http://www.linkedin.com/directory/people/h.html",
+                "http://www.linkedin.com/directory/people/i.html",
+                "http://www.linkedin.com/directory/people/j.html",
+                "http://www.linkedin.com/directory/people/k.html",
+                "http://www.linkedin.com/directory/people/l.html",
+                "http://www.linkedin.com/directory/people/m.html",
+                "http://www.linkedin.com/directory/people/n.html",
+                "http://www.linkedin.com/directory/people/o.html",
+                "http://www.linkedin.com/directory/people/p.html",
+                "http://www.linkedin.com/directory/people/q.html",
+                "http://www.linkedin.com/directory/people/r.html",
+                "http://www.linkedin.com/directory/people/s.html",
+                "http://www.linkedin.com/directory/people/t.html",
+                "http://www.linkedin.com/directory/people/u.html",
+                "http://www.linkedin.com/directory/people/v.html",
+                "http://www.linkedin.com/directory/people/w.html",
+                "http://www.linkedin.com/directory/people/x.html",
+                "http://www.linkedin.com/directory/people/y.html",
+                "http://www.linkedin.com/directory/people/z.html"]
+
+        #start_urls = start_urls[0:1]
 
 	def parse(self, response):
-		hxs = HtmlXPathSelector(response)	   	
-		
+		hxs = HtmlXPathSelector(response)
+                
+                #return
+
+
 		if not hxs.select('//body[@class="guest directory"]'): #if it is not a directory (its a regular page)
-			
 			if hxs.select('//meta[@name="pageImpressionID"]'): 
-			
-			
-			
+
 				item = linkedInItem()		
 				item ['url']					= response.url
-			
-				item['name'] 					= striplist(hxs.select('//h1/span/span/text()').extract())
-				item['headlineTitle'] 			= striplist(hxs.select('//p[@class="headline-title title"]/text()').extract())
-				item['location'] 				= striplist(hxs.select('//dd/span/text()').extract())
-			
-			
+				
+                                # I found that linkedIn changed around their HTML. Furthermore linkedin seems to have .
+                                #item['name'] = striplist(hxs.select('//h1/span/span/text()').extract())
+                                item['headlineTitle'] = striplist(hxs.select('//p[@class="headline-title title"]/text()').extract())
+
+
+                                HTMLtitle = striplist(hxs.select('//title/text()').extract())
+                                item['name'] = [HTMLtitle[0].split('|')[0].strip()]
+				item['location'] = striplist(hxs.select('//dd/span/text()').extract())			
+
 				#if not checkLocation(item['location']):
 					#print item['location']
 					#sys.stdout.flush()
 				#else:
 				
-				if checkLocation(item['location']):
-					item['industry'] 				= striplist(hxs.select('//dd[@class="industry"]/text()').extract())		
-		
-					item['overviewCurrent'] 		= striplist(hxs.select('//dd[@class="summary-current"]/ul[@class="current"]/li/text()').extract())
-					item['overviewPast'] 			= striplist(hxs.select('//dd[@class="summary-past"]/ul[@class="past"]/li/text()').extract())
-					item['overviewEducation'] 		= striplist(hxs.select('//dd[@class="summary-education"]/ul/li/text()').extract())
-		
+				if filterForUS and checkLocation(item['location']):
+                                        item['industry'] = striplist(hxs.select('//dd[@class="industry"]/text()').extract())		
+					item['overviewCurrent'] = striplist(hxs.select('//dd[@class="summary-current"]/ul[@class="current"]/li/text()').extract())
+					item['overviewPast'] = striplist(hxs.select('//dd[@class="summary-past"]/ul[@class="past"]/li/text()').extract())
+					item['overviewEducation'] = striplist(hxs.select('//dd[@class="summary-education"]/ul/li/text()').extract())
 					#item['recommendations'] 		= striplist(hxs.select('').extract())
 					item['connections'] 			= striplist(hxs.select('//dd[@class="overview-connections"]/p/strong/text()').extract())
 					#item['websites'] 				= striplist(hxs.select('').extract())
@@ -337,30 +340,11 @@ class linkedInSpider(BaseSpider):
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 					yield item
 		
 		else : #if it is a directory
 			for url in hxs.select('//ul[@class="directory"]/li/a/@href').extract(): #take all of the subdirectories that show up and request them
-				if not randomSampling or random.random() < 0.1: 								#random sampling.
+				if not randomSampling or random.random() < samplingProbability: #random sampling.
 					yield Request('http://www.linkedin.com'+url, callback=self.parse)
 				
 			
