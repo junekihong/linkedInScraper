@@ -1,0 +1,3 @@
+*.pyc
+scraped_data_utf8.json
+items.json
