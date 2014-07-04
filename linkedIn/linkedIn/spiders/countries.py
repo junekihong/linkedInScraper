@@ -42,9 +42,7 @@ countries = dict([
 	('Brunei Darussalam' , 'BN'),
 	('Bolivia' , 'BO'),
 	('Brazil' , 'BR'),
-	('Brasil' , 'BR'),
-	
-	
+	('Brasil' , 'BR'),	
 	('Bahama' , 'BS'),
 	('Bhutan' , 'BT'),
 	('Burma ' , 'BU'),
@@ -60,8 +58,7 @@ countries = dict([
 	('Cote D\'ivoire' , 'CI'),
 	('Cote D\'\'ivoire' , 'CI'),
 	('Cote D\'Ivoire' , 'CI'),
-	('Cote D\'\'Ivoire' , 'CI'),
-	
+	('Cote D\'\'Ivoire' , 'CI'),	
 	('Cook Islands' , 'CK'),
 	('Chile' , 'CL'),
 	('Cameroon' , 'CM'),
@@ -77,9 +74,7 @@ countries = dict([
 	('German Democratic Republic ' , 'DD'),
 	('Germany' , 'DE'),
 	('Deutschland' , 'DE'),
-	('Alemania' , 'DE'),
-	
-	
+	('Alemania' , 'DE'),	
 	('Djibouti' , 'DJ'),
 	('Denmark' , 'DK'),
 	('Dominica' , 'DM'),
@@ -115,8 +110,7 @@ countries = dict([
 	('Guadeloupe' , 'GP'),
 	('Equatorial Guinea' , 'GQ'),
 	('Greece' , 'GR'),
-	('Grecia' , 'GR'),
-	
+	('Grecia' , 'GR'),	
 	('South Georgia and the South Sandwich Islands' , 'GS'),
 	('Guatemala' , 'GT'),
 	('Guam' , 'GU'),
@@ -287,9 +281,6 @@ countries = dict([
 	('Zambia' , 'ZM'),
 	('Zaire' , 'ZR'),
 	('Zimbabwe' , 'ZW'),
-
-
-
 ])
 
 
