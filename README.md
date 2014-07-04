@@ -2,6 +2,7 @@ LinkedIn Scraper
 ================
 
 Juneki Hong 
+
 juneki@cs.jhu.edu
 
 Updated August 2014
