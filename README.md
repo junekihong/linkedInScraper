@@ -44,7 +44,7 @@ SUMMARY OF FILES
 -linkedIn_spider.py is the spider. It goes through and requests webpages (you can imagine that it goes and automatically "clicks on" each webpage to open it up). Once it opens up a page, it will go through and store all the information we want in an "item" object and then returns the item (which was specified in items.py).
       -If you look near the top of linkedIn_spider.py, where the spider is being initialized, you will see a big list of URLs. Those are the URLs I wanted the spider to start with, and as it explores linkedIn it will add new URLs that it discovers to this list. 
       -Linkedin is nice enough to have this phonebook-like directory structure so we can go through it looking for profiles to scrape, or more directory pages to explore. If you have a specific list of URLs you want to scrape, you could put that into the spider's starting URL list.
--settings.py is the settings file. Scrapy does a lot of very convienient things by default, but sometimes I wanted it to specifically do something else (for example, searching through the LinkedIn directory of people in a Breadth-First Order strategy instead of the default Depth-First Order). All that stuff is specified here.
+-settings.py is the settings file. Scrapy does a lot of very convenient things by default, but sometimes I wanted it to specifically do something else (for example, searching through the LinkedIn directory of people in a Breadth-First Order strategy instead of the default Depth-First Order). All that stuff is specified here.
 -items.txt is the output file that is created by the project when you run it. It contains all of the delicious data that you want!
 
 
