@@ -20,9 +20,10 @@ def striplist(l):
 class linkedInSpider(BaseSpider):
     name = "linkedin.com"
     allowed_domains = ["linkedin.com"]
-    #start_urls = ["http://www.linkedin.com/directory/people-%s" % s
-    #              for s in "abcdefghijklmnopqrstuvwxyz"]
-    start_urls = ["https://www.linkedin.com/directory/people-a-1"]
+    start_urls = ["http://www.linkedin.com/directory/people-%s" % s
+                  for s in "abcdefghijklmnopqrstuvwxyz"]
+    
+    #start_urls = ["https://www.linkedin.com/directory/people-a-1"]
     #start_urls = ["https://www.linkedin.com/in/aakriti-tambi-b593ba4a","https://www.linkedin.com/in/exobialegal"]
     
     def parse(self, response):
